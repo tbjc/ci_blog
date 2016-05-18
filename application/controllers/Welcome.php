@@ -27,9 +27,7 @@ class Welcome extends CI_Controller {
 
 	public function base(){
 		//$this->load->model('User');
-		$query = $this->db->query('SELECT * FROM user');
-		
 
-		echo json_encode($query->result());
+		echo json_encode();
 	}
 }

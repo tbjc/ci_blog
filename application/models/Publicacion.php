@@ -25,6 +25,11 @@ class Publicacion extends Eloquent {
         return $this->hasMany('Comentario');
     }
 
+    public function categorias()
+    {
+    	
+    }
+
 }
 
 /* End of file Publicacion.php */
