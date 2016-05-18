@@ -3,9 +3,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 use \Illuminate\Database\Eloquent\Model as Eloquent;
 
-class User extends Eloquent{
-	protected $table = "user";
-	protected $CI;
+class Comentario extends Eloquent{
+	protected $table = "comentario";
+	protected CI;
 
 	public function __construct()
 	{
@@ -13,11 +13,10 @@ class User extends Eloquent{
 		$this->CI = & get_instance();
 	}
 
-	public function publicaciones()
+	public function Publicacion()
     {
     	$this->CI->load->model('Publicacion');
-        return $this->hasMany('Publicacion');
+        return $this->belongsTo('Publicacion');
     }
 	
 }
-
