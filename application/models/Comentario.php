@@ -5,7 +5,8 @@ use \Illuminate\Database\Eloquent\Model as Eloquent;
 
 class Comentario extends Eloquent{
 	protected $table = "comentario";
-	protected CI;
+	protected $CI;
+	public $timestamps = false;
 
 	public function __construct()
 	{

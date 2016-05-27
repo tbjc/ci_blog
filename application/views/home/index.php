@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
 
@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Blog Home - Start Bootstrap Template</title>
+    <title>EBAC</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo base_url(); ?>public/css/bootstrap.min.css" rel="stylesheet">
@@ -54,6 +54,11 @@
                         <a href="#">Contact</a>
                     </li>
                 </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="<?= base_url()?>index.php/login"><span class="glyphicon glyphicon-log-in"></span> Entrar</a>
+                    </li>
+                </ul>
             </div>
             <!-- /.navbar-collapse -->
         </div>
@@ -66,11 +71,10 @@
         <div class="row">
 
             <!-- Blog Entries Column -->
-            <div class="col-md-8">
+            <div class="col-md-8 well">
 
                 <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
+                    Escuela de Bachilleres Angel Carvajal
                 </h1>
                 
                 <!-- First Blog Post -->
@@ -116,7 +120,7 @@
                 <hr>
                 <img class="img-responsive" src="http://placehold.it/900x300" alt="">
                 <hr>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, voluptates, voluptas dolore ipsam cumque quam veniam accusantium laudantium adipisci architecto itaque dicta aperiam maiores provident id incidunt autem. Magni, ratione.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate, voluptates, voluptas dolore ipsam cumque quam veniam accusantium laudantium adipisci architecto itaque dicta aperiam maiores provident id incidunt autem. Magni, ratione. :) </p>
                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
@@ -186,8 +190,7 @@
 
                 <!-- Side Widget Well -->
                 <div class="well">
-                    <h4>Side Widget Well</h4>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Inventore, perspiciatis adipisci accusamus laudantium odit aliquam repellat tempore quos aspernatur vero.</p>
+                    <div class="fb-page" data-href="https://www.facebook.com/Escuela-De-Bachilleres-Angel-Carvajal-108121622648400" data-tabs="timeline" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"></div>
                 </div>
 
             </div>
@@ -198,7 +201,7 @@
         <hr>
 
         <!-- Footer -->
-        <footer>
+        <footer class="well">
             <div class="row">
                 <div class="col-lg-12">
                     <p>Copyright &copy; Your Website 2014</p>
@@ -217,6 +220,16 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url(); ?>public/js/bootstrap.min.js"></script>
 
+    <!-- Facebook pagina -->
+    <div id="fb-root"></div>
+        <script>(function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "//connect.facebook.net/es_ES/sdk.js#xfbml=1&version=v2.6";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
+        </script>
 </body>
 
 </html>

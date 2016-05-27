@@ -6,6 +6,7 @@ use \Illuminate\Database\Eloquent\Model as Eloquent;
 class Publicacion extends Eloquent {
 	protected $table = "publicacion";
 	protected $CI;
+    public $timestamps = false;
 
 	public function __construct()
 	{
@@ -27,7 +28,8 @@ class Publicacion extends Eloquent {
 
     public function categorias()
     {
-    	
+        $this->CI->load->model('Categoria');
+    	return $this->belongsToMany('Categoria','publicacion_to_categoria','publicacion_id','categoria_id');
     }
 
 }
