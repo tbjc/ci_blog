@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Inicio extends CI_Controller {
 
-	/**
+	/*
 	 * Index Page for this controller.
 	 *
 	 * Maps to the following URL
@@ -26,7 +26,10 @@ class Inicio extends CI_Controller {
 	}
 
 	public function dashboard(){
-		$this->load->view('dashboard/index');
+		$datos['seleccion']='inicio';
+		$this->load->view('dashboard/index-head',$datos);
+		$this->load->view('dashboard/admin-home');
+		$this->load->view('dashboard/index-footer');
 	}
 
 	public function login(){
