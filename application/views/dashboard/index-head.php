@@ -34,6 +34,11 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+    <script src="<?php echo base_url(); ?>public/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="<?php echo base_url(); ?>public/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>

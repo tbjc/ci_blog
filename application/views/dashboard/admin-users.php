@@ -1,4 +1,5 @@
 <!-- Page Heading -->
+
 <div class="row">
     <div class="col-lg-12">
         <div>
@@ -45,22 +46,22 @@
       </div>
       <!-- buerpo del form para agregar usuarios -->
       <div class="modal-body">
-        <form role="form">
+        <form role="form" id="formAgregaUsuario">
 		  <div class="form-group">
 		    <label for="nombre">Nombre completo:</label>
-		    <input type="email" class="form-control" id="nombre">
+		    <input type="email" class="form-control" id="nombre" name="nombre">
 		  </div>
 		  <div class="form-group">
 		    <label for="username">Nombre de usuario:</label>
-		    <input type="email" class="form-control" id="username">
+		    <input type="email" class="form-control" id="username" name="username">
 		  </div>
 		  <div class="form-group">
 		    <label for="email">Correo electronico:</label>
-		    <input type="email" class="form-control" id="email">
+		    <input type="email" class="form-control" id="email" name="email">
 		  </div>
 		  <div class="form-group">
 		    <label for="paswword">Password:</label>
-		    <input type="password" class="form-control" id="paswword">
+		    <input type="password" class="form-control" id="paswword" name="paswword">
 		  </div>
 		</form>
       </div>
@@ -71,3 +72,37 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
+
+<script src="<?= base_url(); ?>public/js/jquery.dataTables.min.js"></script>
+<script src="<?= base_url(); ?>public/js/dataTables.bootstrap.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#Usuarios').DataTable({
+            "language":{
+                "sProcessing":     "Procesando...",
+                "sLengthMenu":     "Mostrar _MENU_ registros",
+                "sZeroRecords":    "No se encontraron resultados",
+                "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                "sInfoPostFix":    "",
+                "sSearch":         "Buscar:",
+                "sUrl":            "",
+                "sInfoThousands":  ",",
+                "sLoadingRecords": "Cargando...",
+                "oPaginate": {
+                    "sFirst":    "Primero",
+                    "sLast":     "Último",
+                    "sNext":     "Siguiente",
+                    "sPrevious": "Anterior"
+                },
+                "oAria": {
+                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+        });
+</script>
+<script src="<?= base_url(); ?>public/js/usuario.js"></script>
