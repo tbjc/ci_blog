@@ -6,7 +6,7 @@ use \Illuminate\Database\Eloquent\Model as Eloquent;
 class User extends Eloquent{
 	protected $table = "user";
 	protected $CI;
-	protected $hidden = ['password'];
+	protected $hidden = array('paswword');
 	public $timestamps = false;
 
 	public function __construct()

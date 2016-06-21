@@ -52,5 +52,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['default_controller'] = 'inicio';
 $route['404_override'] = '';
 $route['dashboard'] = 'inicio/dashboard';
+$route['usuarios'] = 'inicio/usuarios';
+$route['publicaciones'] = 'inicio/publicaciones';
+$route['comentarios'] = 'inicio/comentarios';
 $route['login'] = 'inicio/login';
+////////////////////////////////////////////
+// Acciones para el manejo de los usuarios//
+////////////////////////////////////////////
+$route['user/delete/(:num)'] = 'users/delete/$1';
+$route['user/update/(:num)']['put'] = 'users/update/$1';
+$route['user/(:num)'] = 'users/index/$1';
+$route['user']['post'] = 'users/add';
+//////////////////////////////////////////////////////
 $route['translate_uri_dashes'] = FALSE;

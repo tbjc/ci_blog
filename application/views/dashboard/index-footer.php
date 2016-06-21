@@ -13,10 +13,38 @@
     <!-- Bootstrap Core JavaScript -->
     <script src="<?php echo base_url(); ?>public/js/bootstrap.min.js"></script>
 
-    <!-- Morris Charts JavaScript -->
-    <script src="<?php echo base_url(); ?>public/js/plugins/morris/raphael.min.js"></script>
-    <script src="<?php echo base_url(); ?>public/js/plugins/morris/morris.min.js"></script>
-    <script src="<?php echo base_url(); ?>public/js/plugins/morris/morris-data.js"></script>
+    <script src="<?= base_url(); ?>public/js/jquery.dataTables.min.js"></script>
+    <script src="<?= base_url(); ?>public/js/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.table').DataTable({
+                "language":{
+                    "sProcessing":     "Procesando...",
+                    "sLengthMenu":     "Mostrar _MENU_ registros",
+                    "sZeroRecords":    "No se encontraron resultados",
+                    "sEmptyTable":     "Ningún dato disponible en esta tabla",
+                    "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                    "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
+                    "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
+                    "sInfoPostFix":    "",
+                    "sSearch":         "Buscar:",
+                    "sUrl":            "",
+                    "sInfoThousands":  ",",
+                    "sLoadingRecords": "Cargando...",
+                    "oPaginate": {
+                        "sFirst":    "Primero",
+                        "sLast":     "Último",
+                        "sNext":     "Siguiente",
+                        "sPrevious": "Anterior"
+                    },
+                    "oAria": {
+                        "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                    }
+                }
+            });
+        });
+    </script>
 
 </body>
 

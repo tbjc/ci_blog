@@ -32,6 +32,30 @@ class Inicio extends CI_Controller {
 		$this->load->view('dashboard/index-footer');
 	}
 
+	public function usuarios(){
+		$this->load->model('User');
+		$usuarios = User::all();
+		$datos['seleccion']='usuarios';
+		$lista['usuarios']=$usuarios;
+		$this->load->view('dashboard/index-head',$datos);
+		$this->load->view('dashboard/admin-users',$lista);
+		$this->load->view('dashboard/index-footer');
+	}
+
+	public function publicaciones(){
+		$datos['seleccion']='publicaciones';
+		$this->load->view('dashboard/index-head',$datos);
+		$this->load->view('dashboard/admin-publ');
+		$this->load->view('dashboard/index-footer');
+	}
+
+	public function comentarios(){
+		$datos['seleccion']='comentarios';
+		$this->load->view('dashboard/index-head',$datos);
+		$this->load->view('dashboard/admin-coment');
+		$this->load->view('dashboard/index-footer');
+	}
+
 	public function login(){
 		$this->load->view('home/login');
 	}
