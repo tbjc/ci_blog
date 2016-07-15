@@ -7,7 +7,6 @@ class Users extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('user');
-
 	}
 
 	public function login(){
@@ -18,6 +17,7 @@ class Users extends CI_Controller {
 	{
 		if ($offset > 0) {
 			$usuario = User::find($offset);
+			header('ContentType:json');
 			echo $usuario->toJson();
 		}else{
 			echo '';
@@ -27,7 +27,14 @@ class Users extends CI_Controller {
 	// Add a new item
 	public function add()
 	{
-		
+		$usuario = new User;
+		$usuario->nombre = $this->input->post("nombre");
+		$usuario->username = $this->input->post("username");
+		$usuario->email = $this->input->post("email");
+		$usuario->paswword = $this->input->post("paswword");
+		$usuario->save();
+		header('ContentType:json');
+		echo json_encode($usuario);
 	}
 
 	//Update one item
@@ -39,7 +46,14 @@ class Users extends CI_Controller {
 	//Delete one item
 	public function delete( $id = NULL )
 	{
-		echo $id;
+		if($id != NULL){
+			$usuario = User::find($id);
+			$usuario->delete();
+			echo $id;
+		}else{
+			echo "error";
+		}
+		
 	}
 }
 

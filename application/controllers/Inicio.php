@@ -63,6 +63,7 @@ class Inicio extends CI_Controller {
 	public function base(){
 		$this->load->model('publicacion');
 		$datos = Publicacion::find(1);
+		header("Content-type:json");
 		echo json_encode($datos->comentarios);
 	}
 }

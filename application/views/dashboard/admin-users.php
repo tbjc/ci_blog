@@ -1,12 +1,16 @@
 <!-- Page Heading -->
-
+<style type="text/css">
+    th{
+        text-align: center;
+    }
+</style>
 <div class="row">
     <div class="col-lg-12">
         <div>
-        	<button type="button" class="btn btn-info" data-toggle="modal" data-target="#agregarUser"><span class="glyphicon glyphicon-plus"></span> agregar usuario</button>
+        	<button type="button" class="btn btn-info add" data-toggle="modal" data-target="#agregarUser"><span class="glyphicon glyphicon-plus"></span> agregar usuario</button>
         </div>
         <div>
-        	<table id="Usuarios" class="table table-bordered">
+        	<table class="table table-bordered">
         		<thead>
         			<tr>
         				<th>id</th>
@@ -16,21 +20,26 @@
         				<th>Tareas</th>
         			</tr>
         		</thead>
-        		<tbody>
+        		<tbody id="usuarios">
         			<?php foreach ($usuarios as $usuario): ?>
-        				<th><?= $usuario->id ?></th>
-        				<th><?= $usuario->nombre ?></th>
-        				<th><?= $usuario->username ?></th>
-        				<th><?= $usuario->email ?></th>
-        				<th>
-        					<button type="submit" class="btn btn-danger" user-id="<?= $usuario->id ?>"><span class="glyphicon glyphicon-remove"></span></button>
-        					<button type="submit" class="btn btn-primary" user-id="<?= $usuario->id ?>"><span class="glyphicon glyphicon-pencil"></span></button>
-        				</th>
+                        <tr>
+            				<th><?= $usuario->id ?></th>
+            				<th><?= $usuario->nombre ?></th>
+            				<th><?= $usuario->username ?></th>
+            				<th><?= $usuario->email ?></th>
+            				<th>
+            					<button type="button" class="delete btn btn-danger" user-id="<?= $usuario->id ?>"><span class="glyphicon glyphicon-remove"></span></button>
+            					<button type="button" class="btn btn-primary" user-id="<?= $usuario->id ?>"><span class="glyphicon glyphicon-pencil"></span></button>
+            				</th>
+                        </tr>
         			<?php endforeach;?>	
+                    <tr></tr>
         		</tbody>
         	</table>
         </div>
-        
+        <div id="serius">
+            aaaa
+        </div>
     </div>
 </div>
 <!-- /.row -->
@@ -44,16 +53,16 @@
         </button>
         <h4 class="modal-title">Agregar nuevos usuarios</h4>
       </div>
-      <!-- buerpo del form para agregar usuarios -->
+      <!-- cuerpo del form para agregar usuarios -->
       <div class="modal-body">
-        <form role="form" id="formAgregaUsuario">
+        <form role="form" id="formAgregaUsuario"  method="post" >
 		  <div class="form-group">
 		    <label for="nombre">Nombre completo:</label>
-		    <input type="email" class="form-control" id="nombre" name="nombre">
+		    <input type="text" class="form-control" id="nombre" name="nombre">
 		  </div>
 		  <div class="form-group">
 		    <label for="username">Nombre de usuario:</label>
-		    <input type="email" class="form-control" id="username" name="username">
+		    <input type="text" class="form-control" id="username" name="username">
 		  </div>
 		  <div class="form-group">
 		    <label for="email">Correo electronico:</label>
@@ -63,46 +72,19 @@
 		    <label for="paswword">Password:</label>
 		    <input type="password" class="form-control" id="paswword" name="paswword">
 		  </div>
+		  <div class="form-group">
+		    <label for="paswword2">Confirma Password:</label>
+		    <input type="password" class="form-control" id="paswword2" name="paswword2">
+		  </div>
+		   <button type="submit" class="btn btn-primary" id="botonAgregarUsuario">Guardar nuevo usuario</button>
 		</form>
       </div>
       <!-- fin del formulario para agregar usuarios -->
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Guardar nuevo usuario</button>
-      </div>
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-<script src="<?= base_url(); ?>public/js/jquery.dataTables.min.js"></script>
-<script src="<?= base_url(); ?>public/js/dataTables.bootstrap.min.js"></script>
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('#Usuarios').DataTable({
-            "language":{
-                "sProcessing":     "Procesando...",
-                "sLengthMenu":     "Mostrar _MENU_ registros",
-                "sZeroRecords":    "No se encontraron resultados",
-                "sEmptyTable":     "Ningún dato disponible en esta tabla",
-                "sInfo":           "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
-                "sInfoEmpty":      "Mostrando registros del 0 al 0 de un total de 0 registros",
-                "sInfoFiltered":   "(filtrado de un total de _MAX_ registros)",
-                "sInfoPostFix":    "",
-                "sSearch":         "Buscar:",
-                "sUrl":            "",
-                "sInfoThousands":  ",",
-                "sLoadingRecords": "Cargando...",
-                "oPaginate": {
-                    "sFirst":    "Primero",
-                    "sLast":     "Último",
-                    "sNext":     "Siguiente",
-                    "sPrevious": "Anterior"
-                },
-                "oAria": {
-                    "sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
-                        "sSortDescending": ": Activar para ordenar la columna de manera descendente"
-                    }
-                }
-            });
-        });
+    base = "<?= base_url()?>";
 </script>
+
 <script src="<?= base_url(); ?>public/js/usuario.js"></script>
