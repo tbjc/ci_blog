@@ -24,6 +24,24 @@ class Users extends CI_Controller {
 		}
 	}
 
+	public function ismailuser(){
+		$email = $this->input->post("email");
+		$username = $this->input->post("username");
+		$valores;
+		if (User::where('email','=',$email)->count() > 0) {
+			$valor['email']=true;
+		}else{
+			$valor['email']=false;
+		}
+		if (User::where('username','=',$username)->count() > 0) {
+			$valor['username']=true;
+		}else{
+			$valor['username']=false;
+		}
+		header('ContentType:json');
+		echo json_encode($valor);
+	}
+
 	// Add a new item
 	public function add()
 	{
@@ -40,7 +58,7 @@ class Users extends CI_Controller {
 	//Update one item
 	public function update( $id = NULL )
 	{
-
+		$aa = $PUT['nombre'];
 	}
 
 	//Delete one item
