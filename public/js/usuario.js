@@ -18,9 +18,15 @@ $(document).ready(function() {
 		$('#formAgregaUsuario input').removeClass('error-form');
 		$('#formEditaUsuario div').removeClass('error-men');
 		$('#formEditaUsuario input').removeClass('error-form');
+		$('#formEditaUsuario div input').removeClass('error-form');
+
 	}
 
-	function validacionForm(nombre,username,email,password,password2,objeto){
+	$('#toAdd').click(function(event) {
+		$('#formAgregaUsuario input').val('');
+	});
+
+	function validacionForm(nombre,username,email,password,password2,objeto,verPassword){
 		var validate = true;
 		if (nombre.val()=="") {
 			$('.error-nombre').html("Error debe de proporcionar un nombre");
@@ -53,20 +59,24 @@ $(document).ready(function() {
 			email.addClass('error-form');
 			validate = false;
 		}
-		if (password.val()=="") {
-			$('.error-password').html("Error debe de proporcionar un password");
-			$('.error-password').addClass('error-men');
-			password.addClass('error-form');
-			validate = false;
-			console.log('error');
-		}else if (password.val()!= password2.val()) {
-			$('.error-password2').html("las contraseñas deben de ser iguales");
-			$('.error-password2').addClass('error-men');
-			password.addClass('error-form');
-			password2.addClass('error-form');
-			validate = false;
-			console.log('error');
+		if (verPassword!=false) {
+			console.log('se cambia password');
+			if (password.val()=="") {
+				$('.error-password').html("Error debe de proporcionar un password");
+				$('.error-password').addClass('error-men');
+				password.addClass('error-form');
+				validate = false;
+				console.log('error');
+			}else if (password.val()!= password2.val()) {
+				$('.error-password2').html("las contraseñas deben de ser iguales");
+				$('.error-password2').addClass('error-men');
+				password.addClass('error-form');
+				password2.addClass('error-form');
+				validate = false;
+				console.log('error');
+			}
 		}
+		
 		return validate;
 
 	}
@@ -89,7 +99,7 @@ $(document).ready(function() {
 		})
 		.done(function(data) {
 			console.log(data);
-			var validacion = validacionForm(nombre,username,email,password,password2,data);
+			var validacion = validacionForm(nombre,username,email,password,password2,data,true);
 			console.log(validacion);
 			if(validacion){
 				$.ajax({
@@ -101,7 +111,7 @@ $(document).ready(function() {
 				.done(function(data) {
 					//console.log(tabla.html());
 					var cont = tabla.html();
-					tabla.html(cont+'<tr><th>'+data.id+'</th>'+
+					tabla.html(cont+'<tr id-user="'+data.id+'"><th>'+data.id+'</th>'+
 						'<th>'+data.nombre+'</th>'+
 						'<th>'+data.username+'</th>'+
 						'<th>'+data.email+'</th>'+
@@ -112,6 +122,7 @@ $(document).ready(function() {
 						'</tr>');
 					$('.error-input').html('');
 					$('#formAgregaUsuario input').val('');
+					
 					resetInputs();
 					$('#agregarUser').modal('hide');
 					console.log(data);
@@ -150,17 +161,64 @@ $(document).ready(function() {
 			$('#formEditaUsuario input[name="nombre"]').val(data.nombre);
 			$('#formEditaUsuario input[name="username"]').val(data.username);
 			$('#formEditaUsuario input[name="email"]').val(data.email);
+			$('#collapsePassword').collapse('hide');
 			$('#editarUser').modal();
+		}).fail(function(data) {
+			console.log(data);
 		});
+		
 		
 	});
 
 	$('#formEditaUsuario').submit(function(event) {
 		event.preventDefault();
+		resetInputs();
 		id = $(this).attr('id-user');
 		datos = arrayToJson($(this).serializeArray());
-		datos['cambia-password']=true;
-		console.log(datos);
+		var cambiaP;
+		if ($("#cambiaContr").attr('aria-expanded')=="true") {
+			datos['cambia-password']=true;
+			cambiaP=true;
+			
+		}else{
+			datos['cambia-password']=false;
+			cambiaP=false;
+		}
+		nombre = $('#formEditaUsuario input[name="nombre"]');
+		username = $('#formEditaUsuario input[name="username"]');
+		email = $('#formEditaUsuario input[name="email"]');
+		password = $('#formEditaUsuario input[name="paswword"]');
+		password2 = $('#formEditaUsuario input[name="paswword2"]');
+		var validate = validacionForm(nombre,username,email,password,password2,{'email':false,'username':false},cambiaP);
+		console.log(validate);
+		//var fila = $("tr[id-user='15']").html();
+		
+		$.ajax({
+			url: base+'index.php/users/update/'+id,
+			type: 'POST',
+			dataType: 'JSON',
+			data: datos,
+		})
+		.done(function(data) {
+			fila = '<th>'+data.id+'</th>'+
+					'<th>'+data.nombre+'</th>'+
+					'<th>'+data.username+'</th>'+
+					'<th>'+data.email+'</th>'+
+					'<th>'+
+					'<button type="button" class="delete btn btn-danger" user-id="'+data.id+'"><span class="glyphicon glyphicon-remove"></span></button>'+
+					' <button type="button" class="edit btn btn-primary" user-id="'+data.id+'"><span class="glyphicon glyphicon-pencil"></span></button>'+
+					'</th>';
+			$("tr[id-user='15']").html(fila);
+			resetInputs();
+			$('#editarUser').modal('hide');
+		})
+		.fail(function(data) {
+			console.log(data.responseText);
+		})
+		.always(function() {
+			console.log("complete");
+		});
+		
 	});
 
 });

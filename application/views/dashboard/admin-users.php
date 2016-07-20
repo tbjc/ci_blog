@@ -9,11 +9,14 @@
     .error-men{
         color: red;
     }
+    #botonAgregarUsuario{
+        margin-top: 10px;
+    }
 </style>
 <div class="row">
     <div class="col-lg-12">
         <div>
-        	<button type="button" class="btn btn-info add" data-toggle="modal" data-target="#agregarUser"><span class="glyphicon glyphicon-plus"></span> agregar usuario</button>
+        	<button type="button" class="btn btn-info add" data-toggle="modal" data-target="#agregarUser" id="toAdd"><span class="glyphicon glyphicon-plus"></span> agregar usuario</button>
         </div>
         <div>
         	<table class="table table-bordered">
@@ -28,7 +31,7 @@
         		</thead>
         		<tbody id="usuarios">
         			<?php foreach ($usuarios as $usuario): ?>
-                        <tr>
+                        <tr id-user="<?= $usuario->id ?>">
             				<th><?= $usuario->id ?></th>
             				<th><?= $usuario->nombre ?></th>
             				<th><?= $usuario->username ?></th>
@@ -118,6 +121,10 @@
             <input type="email" class="form-control" id="email" name="email">
             <div class="error-email" class="error-input"></div>
           </div>
+            <a class="btn btn-primary" role="button" data-toggle="collapse" href="#collapsePassword" aria-expanded="false" aria-controls="collapsePassword" id="cambiaContr">
+            Cambiar la contraseña
+            </a>
+        <div class="collapse" id="collapsePassword">
           <div class="form-group">
             <label for="paswword">Password:</label>
             <input type="password" class="form-control" id="paswword" name="paswword">
@@ -128,7 +135,10 @@
             <input type="password" class="form-control" id="paswword2" name="paswword2">
             <div class="error-password2" class="error-input"></div>
           </div>
-           <button type="submit" class="btn btn-primary" id="botonAgregarUsuario">Guardar cambios de usuarios</button>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary" id="botonAgregarUsuario">Guardar cambios de usuarios</button>
+        </div>
         </form>
       </div>
       <!-- fin del formulario para agregar usuarios -->

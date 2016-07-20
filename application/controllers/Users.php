@@ -15,31 +15,41 @@ class Users extends CI_Controller {
 
 	public function index( $offset = 0 )
 	{
-		if ($offset > 0) {
-			$usuario = User::find($offset);
-			header('ContentType:json');
-			echo $usuario->toJson();
+		if ($this->input->is_ajax_request()) {
+			if ($offset > 0) {
+				$usuario = User::find($offset);
+				header('ContentType:json');
+				echo $usuario->toJson();
+			}else{
+				echo '';
+			}
 		}else{
-			echo '';
+			redirect('/');
 		}
+		
 	}
 
 	public function ismailuser(){
-		$email = $this->input->post("email");
-		$username = $this->input->post("username");
-		$valores;
-		if (User::where('email','=',$email)->count() > 0) {
-			$valor['email']=true;
+		if ($this->input->is_ajax_request()) {
+			$email = $this->input->post("email");
+			$username = $this->input->post("username");
+			$valores;
+			if (User::where('email','=',$email)->count() > 0) {
+				$valor['email']=true;
+			}else{
+				$valor['email']=false;
+			}
+			if (User::where('username','=',$username)->count() > 0) {
+				$valor['username']=true;
+			}else{
+				$valor['username']=false;
+			}
+			header('ContentType:json');
+			echo json_encode($valor);
 		}else{
-			$valor['email']=false;
+			redirect('/');
 		}
-		if (User::where('username','=',$username)->count() > 0) {
-			$valor['username']=true;
-		}else{
-			$valor['username']=false;
-		}
-		header('ContentType:json');
-		echo json_encode($valor);
+		
 	}
 
 	// Add a new item
@@ -49,7 +59,7 @@ class Users extends CI_Controller {
 		$usuario->nombre = $this->input->post("nombre");
 		$usuario->username = $this->input->post("username");
 		$usuario->email = $this->input->post("email");
-		$usuario->paswword = $this->input->post("paswword");
+		$usuario->paswword = md5($this->input->post("paswword"));
 		$usuario->save();
 		header('ContentType:json');
 		echo json_encode($usuario);
@@ -58,7 +68,29 @@ class Users extends CI_Controller {
 	//Update one item
 	public function update( $id = NULL )
 	{
-		$aa = $PUT['nombre'];
+		if ($this->input->is_ajax_request()) {
+			$usuario = User::find($id);
+			$nombre = $this->input->post('nombre',true);
+			$username = $this->input->post('username',true);
+			$email = $this->input->post('email',true);
+			$paswword = md5($this->input->post('paswword',true));
+			if ($usuario->nombre != $nombre) {
+				$usuario->nombre = $nombre;
+			}	
+			if ($usuario->username != $username) {
+				$usuario->username = $username;
+			}
+			if ($usuario->email != $email) {
+				$usuario->email = $email;
+			}
+			if ($this->input->post('cambia-password')==true) {
+				$usuario->paswword = $paswword;
+			}
+			$usuario->save();
+			header('ContentType:json');
+			echo $usuario->toJson();
+		}
+		
 	}
 
 	//Delete one item

@@ -59,8 +59,8 @@ $route['login'] = 'inicio/login';
 ////////////////////////////////////////////
 // Acciones para el manejo de los usuarios//
 ////////////////////////////////////////////
-$route['user/delete/(:num)'] = 'users/delete/$1';
-$route['user/update/(:num)']['put'] = 'users/update/$1';
+$route['user/delete/(:num)']['delete'] = 'users/delete/$1';
+$route['user/update/(:num)']['post'] = 'users/update/$1';
 $route['user/(:num)'] = 'users/index/$1';
 $route['user']['post'] = 'users/add';
 //////////////////////////////////////////////////////
