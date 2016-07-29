@@ -22,7 +22,33 @@ class Inicio extends CI_Controller {
 
 	public function index()
 	{
-		$this->load->view('home/index');
+		$this->load->model('Publicacion');
+		$pagina = $this->input->get('page');
+		if (isset($pagina)) {
+			$total = Publicacion::all()->count();
+			$postByPage = ($pagina - 1)*5;
+			$sig = $pagina * 5;
+			//echo "sig:".$sig." postByPage:".$postByPage." total:".$total;
+			$publicaciones["pagsig"] = null;
+			if ($sig >= $total) {
+				if ($postByPage <= $total) {
+					$publicaciones["pagsig"] = -1;
+				}else{
+					redirect('/');
+				}
+			}else{
+				$publicaciones["pagsig"]= $pagina+1;
+			}
+			$publicaciones["pagant"] = $pagina-1;
+			$publicaciones["publicaciones"] = Publicacion::take(5)->skip($postByPage)->get();
+			$this->load->view('home/index',$publicaciones);
+		}else{
+			$publicaciones["publicaciones"] = Publicacion::take(5)->skip(0)->get();
+			$publicaciones["pagant"] = 0;
+			$publicaciones["pagsig"] = 2;
+			$this->load->view('home/index',$publicaciones);
+		}
+		
 	}
 
 	public function dashboard(){
@@ -43,9 +69,11 @@ class Inicio extends CI_Controller {
 	}
 
 	public function publicaciones(){
+		$this->load->model('Publicacion');
+		$publicaciones["publicaciones"] = Publicacion::all();
 		$datos['seleccion']='publicaciones';
 		$this->load->view('dashboard/index-head',$datos);
-		$this->load->view('dashboard/admin-publ');
+		$this->load->view('dashboard/admin-publ',$publicaciones);
 		$this->load->view('dashboard/index-footer');
 	}
 

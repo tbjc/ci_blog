@@ -63,5 +63,11 @@ $route['user/delete/(:num)']['delete'] = 'users/delete/$1';
 $route['user/update/(:num)']['post'] = 'users/update/$1';
 $route['user/(:num)'] = 'users/index/$1';
 $route['user']['post'] = 'users/add';
-//////////////////////////////////////////////////////
+/////////////////////////////////////
+// Acciones para las publicaciones //
+/////////////////////////////////////
+$route['publicacion']['post'] = 'publicaciones/add';
+$route['post/(:num)'] = 'publicaciones/index/$1';
+
+
 $route['translate_uri_dashes'] = FALSE;
